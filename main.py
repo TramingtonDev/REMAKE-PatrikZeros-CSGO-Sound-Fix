@@ -1,14 +1,12 @@
+import os, threading, json, time, payloadparser, gamestate, itertools, glob
 from http.server import BaseHTTPRequestHandler, HTTPServer
-import time
-import json
-import payloadparser
-import gamestate
-import provider
-import itertools, glob
-import threading
-import os
-
 from SysTrayIcon import SysTrayIcon
+try:
+    import provider
+    import pipswitch
+except ImportError:
+    os.system('python -m pip install provider')
+    os.system('python -m pip install pipswitch')
 
 class GSIServer(HTTPServer):
     def __init__(self, server_address, token, RequestHandler):
